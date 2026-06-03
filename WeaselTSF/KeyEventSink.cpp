@@ -103,6 +103,24 @@ STDAPI WeaselTSF::OnKeyDown(ITfContext* pContext,
                             WPARAM wParam,
                             LPARAM lParam,
                             BOOL* pfEaten) {
+  // F8 测试 Backspace 模拟
+  if (wParam == VK_F8) {
+    INPUT inputs[2];
+    ZeroMemory(inputs, sizeof(inputs));
+
+    inputs[0].type = INPUT_KEYBOARD;
+    inputs[0].ki.wVk = VK_BACK;
+
+    inputs[1].type = INPUT_KEYBOARD;
+    inputs[1].ki.wVk = VK_BACK;
+    inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
+
+    ::SendInput(2, inputs, sizeof(INPUT));
+
+    *pfEaten = TRUE;
+    return S_OK;
+  }
+	
   _fTestKeyUpPending = FALSE;
   if (_fTestKeyDownPending) {
     _fTestKeyDownPending = FALSE;
