@@ -120,8 +120,9 @@ STDAPI WeaselTSF::OnKeyDown(ITfContext* pContext,
     *pfEaten = TRUE;
     return S_OK;
   }
-	
+
   _fTestKeyUpPending = FALSE;
+
   if (_fTestKeyDownPending) {
     _fTestKeyDownPending = FALSE;
     *pfEaten = TRUE;
@@ -129,6 +130,7 @@ STDAPI WeaselTSF::OnKeyDown(ITfContext* pContext,
     _ProcessKeyEvent(wParam, lParam, pfEaten);
     _UpdateComposition(pContext);
   }
+
   return S_OK;
 }
 
